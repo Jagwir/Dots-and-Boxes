@@ -21,7 +21,12 @@ void run_game() {
         printf("Player %c turn\n", currentPlayer);
         int r1, c1, r2, c2;
         printf("Enter r1 c1 r2 c2: ");
-        scanf("%d %d %d %d", &r1, &c1, &r2, &c2);
+        if (scanf("%d %d %d %d", &r1, &c1, &r2, &c2) != 4) {
+            printf("Invalid move!\n");
+            int ch;
+            while ((ch = getchar()) != '\n' && ch != EOF);
+            continue;
+        }
         int result = make_move(r1, c1, r2, c2, currentPlayer);
 
         if (result == -1) {
