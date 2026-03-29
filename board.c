@@ -75,6 +75,17 @@ int is_valid_move(int r1, int c1, int r2, int c2) {
     if (!((abs(r1 - r2) == 1 && c1 == c2) ||
           (abs(c1 - c2) == 1 && r1 == r2)))
         return 0;
+    if (r1 == r2) { //  the fix to make sure the same move cant be duped
+        int c = (c1 < c2) ? c1 : c2;
+
+        if (h_lines[r1][c] == 1)
+            return 0; 
+    } else {
+        int r = (r1 < r2) ? r1 : r2;
+
+        if (v_lines[r][c1] == 1)
+            return 0; 
+    }
     return 1;
 }
 
