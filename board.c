@@ -145,3 +145,28 @@ int is_game_over() {
                 return 0;
     return 1;
 }
+
+int get_all_valid_moves(Move moves[], int maxMoves) { //finds all the valid moves, counts them and adds a move struct for each valid move so that the bot knows its options
+    int count = 0;
+
+    for (int r = 0; r < ROWS; r++) {
+        for (int c = 0; c < COLS; c++) {
+            if (c + 1 < COLS) { // going right
+                if (is_valid_move(r, c, r, c + 1)) {
+                    if (count < maxMoves) {
+                        moves[count++] = (Move){r, c, r, c + 1};
+                    }
+                }
+            }
+            if (r + 1 < ROWS) { // going down
+                if (is_valid_move(r, c, r + 1, c)) {
+                    if (count < maxMoves) {
+                        moves[count++] = (Move){r, c, r + 1, c};
+                    }
+                }
+            }
+        }
+    }
+
+    return count;
+}
